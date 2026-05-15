@@ -1,0 +1,145 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Import Leaflet CSS here, outside any blocks */
+@import "leaflet/dist/leaflet.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap");
+
+@theme inline {
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.96 0.013 80);
+  --paper: oklch(0.98 0.008 80);
+  --foreground: oklch(0.22 0.012 60);
+  --ink: oklch(0.18 0.01 60);
+  --card: oklch(0.98 0.008 80);
+  --card-foreground: oklch(0.22 0.012 60);
+  --popover: oklch(0.98 0.008 80);
+  --popover-foreground: oklch(0.22 0.012 60);
+  --primary: oklch(0.55 0.13 38);
+  --primary-foreground: oklch(0.98 0.008 80);
+  --secondary: oklch(0.92 0.012 70);
+  --secondary-foreground: oklch(0.22 0.012 60);
+  --muted: oklch(0.93 0.01 70);
+  --muted-foreground: oklch(0.48 0.015 60);
+  --accent: oklch(0.91 0.02 65);
+  --accent-foreground: oklch(0.22 0.012 60);
+  --success: oklch(0.7 0.08 145);
+  --success-foreground: oklch(0.2 0.02 145);
+  --warning: oklch(0.78 0.11 75);
+  --warning-foreground: oklch(0.25 0.03 75);
+  --destructive: oklch(0.55 0.18 27);
+  --destructive-foreground: oklch(0.98 0.008 80);
+  --border: oklch(0.88 0.012 70);
+  --input: oklch(0.88 0.012 70);
+  --ring: oklch(0.55 0.13 38);
+  --chart-1: oklch(0.55 0.13 38);
+  --chart-2: oklch(0.7 0.08 145);
+  --chart-3: oklch(0.78 0.11 75);
+  --chart-4: oklch(0.5 0.08 250);
+  --chart-5: oklch(0.6 0.1 320);
+  --sidebar: oklch(0.96 0.013 80);
+  --sidebar-foreground: oklch(0.22 0.012 60);
+  --sidebar-primary: oklch(0.55 0.13 38);
+  --sidebar-primary-foreground: oklch(0.98 0.008 80);
+  --sidebar-accent: oklch(0.91 0.02 65);
+  --sidebar-accent-foreground: oklch(0.22 0.012 60);
+  --sidebar-border: oklch(0.88 0.012 70);
+  --sidebar-ring: oklch(0.55 0.13 38);
+}
+
+.dark {
+  --background: oklch(0.18 0.01 60);
+  --paper: oklch(0.22 0.012 60);
+  --foreground: oklch(0.96 0.013 80);
+  --ink: oklch(0.98 0.008 80);
+  --card: oklch(0.22 0.012 60);
+  --card-foreground: oklch(0.96 0.013 80);
+  --popover: oklch(0.22 0.012 60);
+  --popover-foreground: oklch(0.96 0.013 80);
+  --primary: oklch(0.65 0.14 38);
+  --primary-foreground: oklch(0.18 0.01 60);
+  --secondary: oklch(0.28 0.014 60);
+  --secondary-foreground: oklch(0.96 0.013 80);
+  --muted: oklch(0.28 0.014 60);
+  --muted-foreground: oklch(0.7 0.012 70);
+  --accent: oklch(0.3 0.02 60);
+  --accent-foreground: oklch(0.96 0.013 80);
+  --success: oklch(0.65 0.09 145);
+  --success-foreground: oklch(0.96 0.013 80);
+  --warning: oklch(0.72 0.11 75);
+  --warning-foreground: oklch(0.18 0.01 60);
+  --destructive: oklch(0.6 0.18 27);
+  --destructive-foreground: oklch(0.96 0.013 80);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.65 0.14 38);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Leaflet custom styles */
+.selected-marker {
+  filter: hue-rotate(150deg) saturate(150%) brightness(90%) !important;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.75rem;
+}

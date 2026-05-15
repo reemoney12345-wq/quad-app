@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  avatar    String?
+  createdAt DateTime @default(now())
+  
+  updates        CampusUpdate[]
+  verifications  UpdateVerification[]
+  items          LostFoundItem[]
+}
+
+model Location {
+  id           String  @id @default(uuid())
+  name         String
+  category     String
+  walkMinutes  Int
+  description  String
+  latitude     Float
+  longitude    Float
+}
+
+model Room {
+  id        String  @id @default(uuid())
+  name      String
+  building  String
+  capacity  Int
+  status    String  // "available", "until", "occupied"
+  until     String?
+}
+
+model CampusUpdate {
+  id             String   @id @default(uuid())
+  userId         String
+  category       String   // "Crowd", "WiFi", "Queue", "Other"
+  location       String
+  message        String
+  confirmations  Int      @default(0)
+  createdAt      DateTime @default(now())
+  
+  user         User                   @relation(fields: [userId], references: [id])
+  verifications UpdateVerification[]
+}
+
+model UpdateVerification {
+  id        String   @id @default(uuid())
+  updateId  String
+  userId    String
+  createdAt DateTime @default(now())
+  
+  update CampusUpdate @relation(fields: [updateId], references: [id])
+  user   User         @relation(fields: [userId], references: [id])
+  
+  @@unique([updateId, userId])
+}
+
+model LostFoundItem {
+  id          String   @id @default(uuid())
+  userId      String
+  type        String   // "lost" or "found"
+  name        String
+  location    String
+  date        String
+  reporter    String
+  note        String?
+  image       String?
+  status      String   @default("open") // "open", "claimed", "resolved"
+  createdAt   DateTime @default(now())
+  
+  user User @relation(fields: [userId], references: [id])
+}
